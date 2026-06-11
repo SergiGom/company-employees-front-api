@@ -9,9 +9,24 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
+    "@tanstack/react-query": "^5.101.0",
+    "@tanstack/react-query-devtools": "^5.101.0",
+    "axios": "^1.17.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
+    "igniteui-react": "^19.7.0",
+    "igniteui-react-charts": "^19.6.0",
+    "igniteui-react-grids": "^19.7.0",
+    "igniteui-react-inputs": "^19.6.0",
+    "igniteui-react-layouts": "^19.6.0",
+    "jwt-decode": "^4.0.0",
     "next": "16.2.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-hook-form": "^7.78.0",
+    "sonner": "^2.0.7",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
