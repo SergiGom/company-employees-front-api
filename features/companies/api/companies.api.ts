@@ -7,9 +7,9 @@ import {
 
 export async function getCompanies() {
   const response =
-    await api.get<PaginatedResponse<Company>>(
-      "/companies"
-    );
+    await api.get<
+      PaginatedResponse<Company>
+    >("/companies");
 
   return response.data;
 }

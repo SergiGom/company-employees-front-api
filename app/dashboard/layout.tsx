@@ -15,9 +15,13 @@ export default function DashboardLayout({
     isAuthenticated,
   } = useAuth();
 
-  if (loading) {
-    return null;
-  }
+ if (loading) {
+  return (
+    <div className="flex h-screen items-center justify-center">
+      <div>Cargando...</div>
+    </div>
+  );
+}
 
   if (!isAuthenticated) {
     redirect("/login");
