@@ -9,7 +9,7 @@ export default function CompaniesPage() {
         </h1>
 
         <p className="text-slate-500">
-          Gestión de compañías registradas
+          Administración de compañías
         </p>
       </div>
 

@@ -1,22 +1,22 @@
 "use client";
 
-import { Company } from "../types/company.types";
+import { Employee } from "../types/employee.types";
 
-import { CompanyForm } from "./company-form";
+import { EmployeeForm } from "./employee-form";
 
 interface Props {
   open: boolean;
   title: string;
-  company?: Company | null;
+  employee?: Employee | null;
   isLoading?: boolean;
   onClose: () => void;
   onSubmit: (data: any) => void;
 }
 
-export function CompanyModal({
+export function EmployeeModal({
   open,
   title,
-  company,
+  employee,
   isLoading,
   onClose,
   onSubmit,
@@ -27,7 +27,7 @@ export function CompanyModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="w-full max-w-lg rounded-xl bg-white p-6 shadow-xl">
+      <div className="w-full max-w-xl rounded-xl bg-white p-6 shadow-xl">
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-xl font-bold">
             {title}
@@ -35,14 +35,13 @@ export function CompanyModal({
 
           <button
             onClick={onClose}
-            className="text-slate-500"
           >
             ✕
           </button>
         </div>
 
-        <CompanyForm
-          company={company}
+        <EmployeeForm
+          employee={employee}
           isLoading={isLoading}
           onSubmit={onSubmit}
         />

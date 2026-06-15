@@ -6,6 +6,18 @@ export interface Company {
   fechaCreacion: string;
 }
 
+export interface CreateCompanyDto {
+  nombre: string;
+  direccion: string;
+  telefono: string;
+}
+
+export interface UpdateCompanyDto {
+  nombre?: string;
+  direccion?: string;
+  telefono?: string;
+}
+
 export interface PaginatedResponse<T> {
   data: T[];
   page: number;

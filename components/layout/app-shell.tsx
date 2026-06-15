@@ -12,17 +12,17 @@ interface Props {
 export function AppShell({
   children,
 }: Props) {
-  return (
-    <div className="flex h-screen">
-      <AppSidebar />
+ return (
+  <div className="flex h-screen bg-slate-100">
+    <AppSidebar />
 
-      <div className="flex flex-1 flex-col">
-        <AppHeader />
+    <div className="flex flex-1 flex-col overflow-hidden">
+      <AppHeader />
 
-        <main className="flex-1 overflow-auto bg-slate-50 p-6">
-          {children}
-        </main>
-      </div>
+      <main className="flex-1 overflow-auto p-8">
+        {children}
+      </main>
     </div>
-  );
+  </div>
+);
 }

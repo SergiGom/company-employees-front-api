@@ -1,9 +1,10 @@
 "use client";
 
 import { redirect } from "next/navigation";
-
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { AppShell } from "@/components/layout/app-shell";
 import { useAuth } from "@/features/auth/hooks/use-auth";
+
 
 export default function DashboardLayout({
   children,
@@ -18,7 +19,7 @@ export default function DashboardLayout({
  if (loading) {
   return (
     <div className="flex h-screen items-center justify-center">
-      <div>Cargando...</div>
+      <LoadingSpinner />
     </div>
   );
 }
