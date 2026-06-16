@@ -170,9 +170,6 @@ export function RegisterForm() {
               Bogotá
             </option>
 
-            <option value="CALI">
-              Cali
-            </option>
           </select>
 
           {errors.ciudad && (
@@ -202,9 +199,6 @@ export function RegisterForm() {
               Admin
             </option>
 
-            <option value="MANAGER">
-              Manager
-            </option>
           </select>
 
           {errors.role && (
