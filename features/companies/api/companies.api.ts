@@ -52,4 +52,17 @@ export async function deleteCompany(
   await api.delete(
     `/companies/${id}`
   );
+
+  
+}
+
+export async function getCompanyEmployees(
+  companyId: number
+) {
+  const response =
+    await api.get(
+      `/companies/${companyId}/employees`
+    );
+
+  return response.data;
 }

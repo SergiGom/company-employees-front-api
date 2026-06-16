@@ -12,6 +12,9 @@ import { useDeleteCompany } from "../hooks/use-delete-company";
 import { EmptyState } from "@/components/ui/empty-state";
 import { CompanyModal } from "./company-modal";
 
+import { getCompanyEmployees } from "../api/companies.api";
+
+import { CompanyEmployeesModal } from "./company-employees-modal";
 
 
 export function CompaniesTable() {
@@ -35,6 +38,21 @@ export function CompaniesTable() {
 
     const [search, setSearch] =
   useState("");
+
+  const [
+  employeesModalOpen,
+  setEmployeesModalOpen,
+] = useState(false);
+
+const [
+  companyEmployees,
+  setCompanyEmployees,
+] = useState([]);
+
+const [
+  companyName,
+  setCompanyName,
+] = useState("");
 
   const handleCreate = async (
     values: any
@@ -73,6 +91,27 @@ export function CompaniesTable() {
 
     await deleteMutation.mutateAsync(
       id
+    );
+  };
+
+  const handleViewEmployees =
+  async (
+    companyId: number,
+    name: string
+  ) => {
+    const response =
+      await getCompanyEmployees(
+        companyId
+      );
+
+    setCompanyEmployees(
+      response.data
+    );
+
+    setCompanyName(name);
+
+    setEmployeesModalOpen(
+      true
     );
   };
 
@@ -207,7 +246,21 @@ export function CompaniesTable() {
               className="rounded bg-red-500 px-3 py-1 text-white"
             >
               Eliminar
+
+              
             </button>
+
+            <button
+  onClick={() =>
+    handleViewEmployees(
+      company.id,
+      company.nombre
+    )
+  }
+  className="rounded bg-slate-700 px-3 py-1 text-white"
+>
+  Empleados
+</button>
           </div>
         </td>
       </tr>
@@ -239,6 +292,16 @@ export function CompaniesTable() {
             : handleCreate
         }
       />
+      <CompanyEmployeesModal
+  open={employeesModalOpen}
+  companyName={companyName}
+  employees={companyEmployees}
+  onClose={() =>
+    setEmployeesModalOpen(
+      false
+    )
+  }
+/>
     </>
   );
 }

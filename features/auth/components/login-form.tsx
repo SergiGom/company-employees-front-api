@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { useForm } from "react-hook-form";
@@ -9,6 +10,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { toast } from "sonner";
+
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+} from "lucide-react";
 
 import {
   loginSchema,
@@ -31,6 +39,9 @@ export function LoginForm() {
   const [isSubmitting, setIsSubmitting] =
     useState(false);
 
+  const [showPassword, setShowPassword] =
+    useState(false);
+
   const { mutateAsync } = useLogin();
 
   const {
@@ -50,7 +61,9 @@ export function LoginForm() {
       const response =
         await mutateAsync(data);
 
-      setToken(response.access_token);
+      setToken(
+        response.access_token
+      );
 
       const profile =
         await getProfile();
@@ -61,7 +74,7 @@ export function LoginForm() {
         "Inicio de sesión exitoso"
       );
 
-      router.push("/");
+      router.replace("/dashboard");
     } catch (error) {
       console.error(error);
 
@@ -74,14 +87,15 @@ export function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-lg">
-      <div className="mb-8">
+    <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+      <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold">
-          Company Employees
+          Company Hub
         </h1>
 
         <p className="mt-2 text-sm text-slate-500">
-          Inicia sesión para continuar
+          Inicia sesión para administrar
+          compañías y empleados
         </p>
       </div>
 
@@ -94,11 +108,19 @@ export function LoginForm() {
             Correo
           </label>
 
-          <input
-            type="email"
-            {...register("correo")}
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-500"
-          />
+          <div className="relative">
+            <Mail
+              size={18}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+
+            <input
+              type="email"
+              {...register("correo")}
+              placeholder="correo@empresa.com"
+              className="w-full rounded-lg border border-slate-300 py-3 pl-10 pr-4 outline-none transition focus:border-blue-500"
+            />
+          </div>
 
           {errors.correo && (
             <p className="mt-1 text-sm text-red-500">
@@ -112,11 +134,43 @@ export function LoginForm() {
             Contraseña
           </label>
 
-          <input
-            type="password"
-            {...register("password")}
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-blue-500"
-          />
+          <div className="relative">
+            <Lock
+              size={18}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            />
+
+            <input
+              type={
+                showPassword
+                  ? "text"
+                  : "password"
+              }
+              {...register(
+                "password"
+              )}
+              placeholder="••••••••"
+              className="w-full rounded-lg border border-slate-300 py-3 pl-10 pr-12 outline-none transition focus:border-blue-500"
+            />
+
+            <button
+              type="button"
+              onClick={() =>
+                setShowPassword(
+                  !showPassword
+                )
+              }
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500"
+            >
+              {showPassword ? (
+                <EyeOff
+                  size={18}
+                />
+              ) : (
+                <Eye size={18} />
+              )}
+            </button>
+          </div>
 
           {errors.password && (
             <p className="mt-1 text-sm text-red-500">
@@ -134,6 +188,16 @@ export function LoginForm() {
             ? "Ingresando..."
             : "Iniciar sesión"}
         </button>
+
+        <div className="text-center text-sm text-slate-500">
+          ¿No tienes cuenta?{" "}
+          <Link
+            href="/register"
+            className="font-medium text-blue-600 hover:underline"
+          >
+            Crear cuenta
+          </Link>
+        </div>
       </form>
     </div>
   );
